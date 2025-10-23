@@ -207,6 +207,18 @@ html,body{
   font-weight:600;
   border-radius:8px;
 }
+.accordion-toggle::after{
+  content: '';
+  position: absolute;
+  top: 50%; /* Center the arrow vertically */
+  right: 10px; /* Position the arrow from the right edge */
+  transform: translateY(-50%); /* Fine-tune vertical alignment */
+  
+  /* Style for a triangle shape */
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+}
 .accordion-panel{ overflow:hidden; max-height:0; transition:max-height .28s ease; display:flex; flex-direction:column; gap:6px; padding-left:8px; }
 
 /* ---------- HERO ---------- */
@@ -369,3 +381,4 @@ html,body{
   outline: 3px solid rgba(139,58,58,0.12);
   outline-offset: 3px;
 }
+
