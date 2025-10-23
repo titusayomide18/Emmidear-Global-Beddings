@@ -88,7 +88,7 @@ html,body{
   padding:0;
   align-items:center;
 }
-.nav-list a, .drop-btn{
+.nav-list a{
   text-decoration:none;
   color:var(--text);
   padding:8px 12px;
@@ -99,9 +99,32 @@ html,body{
   border:0;
   cursor:pointer;
 }
-.nav-list a:hover, .drop-btn:hover{
+.nav-list a:hover{
   background: rgba(139,58,58,0.06);
-    transform: translateY(-50%) rotate(180deg);
+}
+
+.drop-btn{
+	text-decoration: none;
+  background:var(--accent);
+  color:var(--white);
+  box-shadow: 0 6px 14px rgba(139,58,58,0.18);
+  width: 200px;
+  height: 42px;
+}
+.drop-btn:hover{
+	background:var(--accent-dark); transform:translateY(-2px); transition:transform .15s ease;
+}
+.drop-btn::after{
+  content: '';
+  position: absolute;
+  top: 50%; /* Center the arrow vertically */
+  right: 10px; /* Position the arrow from the right edge */
+  transform: translateY(-50%); /* Fine-tune vertical alignment */
+  
+  /* Style for a triangle shape */
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
 }
 
 /* dropdown styles */
@@ -383,6 +406,7 @@ html,body{
   outline: 3px solid rgba(139,58,58,0.12);
   outline-offset: 3px;
 }
+
 
 
 
