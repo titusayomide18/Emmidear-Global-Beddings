@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Home - Emmidear Global Enterprises{% endblock %}
+{% block content %}
+<main class="site-main">
+    <section class="hero">
+        <div class="hero-media" role="img" aria-label="Emmidear featured products">
+            <img src="{{ url_for('static', filename='uploads/Main logo.png') }}" alt="Featured products placeholder">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Emmidear Global Enterprises</h1>
+            <p class="hero-sub">
+                Quality duvets, bedsheets, pillows, and essentials made for home comfort in Abuja, Nigeria.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#">Shop Now</a>
+                <a class="btn btn-secondary" href="#">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <section class="products-section" aria-label="Products">
+        <div class="section-header">
+            <h2>Featured Products</h2>
+            <p class="muted">Products from the database — click a product to view details.</p>
+        </div>
+        <!-- products-grid: server-rendered fallback is here -->
+        <div class="products-grid" id="productsGrid">
+            {% if featured and featured|length %}
+            {% for p in featured %}
+            <article class="product-card" role="article" aria-labelledby="prod-{{ p.id }}">
+                <a href="{{ url_for('main.product_detail', slug=p.slug) }}" class="product-link">
+                    {# inside the for p in featured loop #}
+                    {% set imgfile = (p._images and p._images[0].filename) or 'Throw-Pillow-a.jpg' %}
+                    <img src="{{ url_for('static', filename='uploads/product-pics/Throw-Pillow-a.jpg') }}" alt="{{ p.name }}">
+                    <div class="product-thumb">
+                        <img src="{{ url_for('static', filename='uploads/product-pics/Throw-Pillows-a.jpg') }}" alt="{{ p.name }}">
+                    </div>
+                    <div class="product-info">
+                        <h3 id="prod-{{ p.id }}">{{ p.name }}</h3>
+                        {% if p.description_short %}
+                        <p class="muted small">{{ p.description_short }}</p>
+                        {% endif %}
+                        <p class="price">₦{{ "{:,.0f}".format(p.price) }}</p>
+                    </div>
+                </a>
+            </article>
+            {% endfor %}
+            {% else %}
+            <div class="muted">No featured products found — seed the DB or mark some as featured.</div>
+            {% endif %}
+        </div>
+    </section>
+    <section class="about-blurb">
+        <h2>Why shop with Emmidear?</h2>
+        <p>We offer quality beddings and home essentials crafted with care, affordable prices, local delivery across Abuja, and friendly customer service.</p>
+    </section>
+</main>
+{% endblock %}

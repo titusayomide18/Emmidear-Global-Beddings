@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} — Emmidear{% endblock %}
+{% block content %}
+<main class="site-main product-page">
+    <div class="product-container">
+        <div class="product-gallery">
+            {% if product._images and product._images|length %}
+            {% for img in product._images %}
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='uploads/product-pics/' ~ img.filename) }}" alt="{{ product.name }}">
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='uploads/product-pics/product-placeholder-1.jpg') }}" alt="{{ product.name }}">
+            </div>
+            {% endif %}
+        </div>
+        <div class="product-meta">
+            <h1>{{ product.name }}</h1>
+            <p class="muted small">{{ product.description_short }}</p>
+            <p class="price">₦{{ "{:,.0f}".format(product.price) }}</p>
+            <div class="product-actions">
+                <label for="qty">Quantity</label>
+                <input id="qty" type="number" min="1" value="1" />
+                <button id="addToCart" class="btn btn-primary">Add to Cart</button>
+            </div>
+            <section class="product-long">
+                <h3>Details</h3>
+                <p>{{ product.description_long }}</p>
+            </section>
+        </div>
+    </div>
+</main>
+{% endblock %}
